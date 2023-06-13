@@ -9,6 +9,9 @@ const initialState = {
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
 
+
+const INCREMENT2 = "INCREMENT2";
+
 // action
 const increment = (value) => {
 	return {
@@ -28,7 +31,6 @@ const counterReducer = (state = initialState, action) => {
 		return {
 			...state,
 			count: state.count + action.payload,
-			counter: state.counter + action.payload,
 		};
 	} else if (action.type === DECREMENT) {
 		return {
@@ -36,7 +38,13 @@ const counterReducer = (state = initialState, action) => {
 			count: state.count - action.payload,
 			counter: state.counter - action.payload,
 		};
-	} else {
+	} else if(action.type===INCREMENT2){
+		return{
+			...state,
+			counter:state.counter+1
+		}
+	}
+	else {
 		return state;
 	}
 };
@@ -48,6 +56,7 @@ store.subscribe(() => {
 });
 
 store.dispatch(increment(2));
+
 store.dispatch(increment(4));
 
 store.dispatch(increment(6));
@@ -55,3 +64,8 @@ store.dispatch(increment(6));
 store.dispatch(increment(8));
 
 store.dispatch(decrement(10));
+
+
+store.dispatch({
+	type:INCREMENT2
+})
